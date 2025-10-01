@@ -13,7 +13,6 @@ class Product extends Component
      */
     public function __construct()
     {
-        //
     }
 
     /**

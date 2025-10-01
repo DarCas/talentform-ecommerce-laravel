@@ -59,11 +59,15 @@ class Product extends Model
         return $this->hasMany(Cart::class);
     }
 
-    public function imageWithPlaceholder(): string
+    public function imageWithPlaceholder(
+        int    $width = 1920,
+        int    $height = 1080,
+        string $text = 'Image Not Found'
+    ): string
     {
         return $this->image ?
             "/storage/products/{$this->image}" :
-            'https://placehold.co/1920x1080.png?text=Image+Not+Found';
+            "https://placehold.co/{$width}x{$height}.png?text=" . urlencode($text);
     }
 
     public function priceVerbose(): false|string
@@ -79,5 +83,11 @@ class Product extends Model
         $parts = explode(',', $priceFormatted);
 
         return "{$parts[0]}<sup>{$parts[1]}</sup>";
+    }
+
+    public function qtyVerbose(): false|string
+    {
+        $formatter = \NumberFormatter::create('it_IT', \NumberFormatter::GROUPING_SEPARATOR_SYMBOL);
+        return $formatter->format($this->qty);
     }
 }
