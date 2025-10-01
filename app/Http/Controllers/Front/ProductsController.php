@@ -7,7 +7,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
-use Illuminate\Pagination\LengthAwarePaginator;
 
 class ProductsController extends Controller
 {
@@ -23,6 +22,7 @@ class ProductsController extends Controller
             $orderBy = 'title';
         }
 
+        /** @var Builder $builder */
         $builder = Product::where('status', 1);
 
         if ($request->query('q')) {
@@ -36,11 +36,9 @@ class ProductsController extends Controller
 
         $builder->orderBy($orderBy, $orderDesc);
 
-        /** @var LengthAwarePaginator $paginator */
         $paginator = $builder->paginate(
             perPage: config('products.pagination.itemsPerPage', 12),
             page: $request->query('page', 1),
-            pageName: 'page',
         );
 
         return view('front.products')
@@ -59,6 +57,12 @@ class ProductsController extends Controller
             ->with('product', $product);
     }
 
+    /**
+     * Elaboro le categorie di prodotto
+     *
+     * @param Request $request
+     * @return array
+     */
     protected function categories(Request $request): array
     {
         /**

@@ -26,18 +26,18 @@
                 </div>
 
                 @if ($pagination)
-                <div class="card mt-4 shadow-sm">
-                    <div class="card-body">
-                        {!! $pagination !!}
+                    <div class="card mt-4 shadow-sm">
+                        <div class="card-body">
+                            {!! $pagination !!}
+                        </div>
                     </div>
-                </div>
                 @endif
 
             </div>
             <div class="col-4">
-                @include('front.products.ordinamento', ['orderBy' => $orderBy, 'orderDesc' => $orderDesc])
-                @include('front.products.categorie', ['categories' => $categories])
-                @include('front.products.latest-view')
+                @include('front.products.partials.ordinamento', ['orderBy' => $orderBy, 'orderDesc' => $orderDesc])
+                @include('front.products.partials.categorie', ['categories' => $categories])
+                @include('front.products.partials.latest-view')
             </div>
         </div>
     </div>

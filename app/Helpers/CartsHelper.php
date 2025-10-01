@@ -49,6 +49,17 @@ abstract class CartsHelper
     }
 
     /**
+     * Il valore totale del nostro carrello formattato
+     *
+     * @return false|string
+     */
+    static function amountCartVerbose(): false|string
+    {
+        $formatter = \NumberFormatter::create('it_IT', \NumberFormatter::CURRENCY);
+        return $formatter->formatCurrency(CartsHelper::amountCart(), 'EUR');
+    }
+
+    /**
      * Verifichiamo se un prodotto è nel nostro carrello
      *
      * @param string $productId
@@ -56,7 +67,10 @@ abstract class CartsHelper
      */
     static function inCart(string $productId): bool
     {
-        return self::get()->has($productId);
+        /** @var Collection $ids */
+        $ids = Session::get('cart', collect());
+
+        return $ids->contains($productId);
     }
 
     /**
