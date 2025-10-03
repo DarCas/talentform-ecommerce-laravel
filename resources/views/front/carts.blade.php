@@ -54,21 +54,23 @@
                                 </div>
                             </div>
                         @empty
-                            @if($_GET['order'])
-                                <div class="alert alert-info">
-                                    L'ordine è stato inviato correttamente
-                                </div>
+                            @if(request()->get('order'))
+                                <x-alert
+                                    type="info"
+                                    content="L'ordine è stato inviato correttamente"
+                                />
                             @else
-                                <div class="alert alert-light">
-                                    Il carrello è vuoto
-                                </div>
+                                <x-alert
+                                    type="light"
+                                    content="Il carrello è vuoto"
+                                />
                             @endif
                         @endforelse
                     </div>
                 </div>
             </div>
 
-            @if (count($products))
+            @if ($products->count())
                 <div class="col-3">
                     <div class="card">
                         <div class="card-body">

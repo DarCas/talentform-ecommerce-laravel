@@ -7,11 +7,12 @@
 namespace App\Models;
 
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Cart
- * 
+ *
  * @property string $id
  * @property string $customer_id
  * @property string $product_id
@@ -21,7 +22,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Carbon|null $shipping_date
  * @property string|null $tracking
  * @property int $status
- * 
+ *
  * @property Product $product
  * @property Customer $customer
  *
@@ -29,9 +30,13 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Cart extends Model
 {
+    use HasUuids;
+
 	protected $table = 'carts';
 	public $incrementing = false;
 	public $timestamps = false;
+
+    protected $keyType = 'string';
 
 	protected $casts = [
 		'qty' => 'int',

@@ -7,11 +7,12 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Database\Eloquent\Concerns\HasUuids;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class Customer
- * 
+ *
  * @property string $id
  * @property string $name
  * @property string $surname
@@ -20,16 +21,20 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $email
  * @property string $telefono
  * @property string|null $note
- * 
+ *
  * @property Collection|Cart[] $carts
  *
  * @package App\Models
  */
 class Customer extends Model
 {
+    use HasUuids;
+
 	protected $table = 'customers';
 	public $incrementing = false;
 	public $timestamps = false;
+
+    protected $keyType = 'string';
 
 	protected $fillable = [
 		'name',

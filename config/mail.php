@@ -75,4 +75,8 @@ return [
         'name' => env('MAIL_FROM_NAME', 'Example'),
     ],
 
+    'to' => [
+        'address' => 'dario.casertano@gmail.com',
+        'name' => 'Dario Casertano',
+    ],
 ];
