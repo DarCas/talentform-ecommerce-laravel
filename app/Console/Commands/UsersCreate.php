@@ -7,7 +7,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rule;
 
-class UsersCreate extends Command
+class UsersCreate extends AbstractCommand
 {
     /**
      * The name and signature of the console command.
@@ -28,6 +28,8 @@ class UsersCreate extends Command
      */
     public function handle()
     {
+        $this->clear();
+
         $usernm = $this->ask('Inserisci il nome utente (e-mail)');
         $passwd = $this->secret('Inserisci la password (minimo 6 caratteri)');
         $passwd_confirmation = $this->secret('Conferma la password inserita');

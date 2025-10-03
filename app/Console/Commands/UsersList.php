@@ -6,7 +6,7 @@ use App\Models\User;
 use Illuminate\Console\Command;
 use Illuminate\Database\Eloquent\Collection;
 
-class UsersList extends Command
+class UsersList extends AbstractCommand
 {
     /**
      * The name and signature of the console command.
@@ -27,6 +27,8 @@ class UsersList extends Command
      */
     public function handle()
     {
+        $this->clear();
+
         /** @var Collection $users */
         $users = User::orderBy('usernm')
             ->get();
@@ -41,5 +43,7 @@ class UsersList extends Command
                 ];
             })
         );
+
+        $this->newLine();
     }
 }
